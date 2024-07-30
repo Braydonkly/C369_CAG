@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top-Up Service</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+    h1 {
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+    .overview {
+        display: flex;
+        align-items: flex-start;
+    }
+    .overview img {
+        max-width: 45%;
+        width:450px;
+        margin-left:30px;
+    }
+    .overview h2 {
+        font-size: 32px;
+        margin-top: 30px;
+        margin-left: 150px;
+    }
+    .overview p {
+        font-size: 18px;
+        line-height: 3.0;
+        margin-left: 150px;
+        margin-top: 20px;
+    }
+    .qr-image{
+        width:30px;
+    }
+    .navbar-brand{
+        margin-right: 40px;
+    }
+    
+    
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" alt="Logo" width="30" height="30">
+            </a>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="overview.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="CreateAcc.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <img src="PayQr.jpeg" alt="Qr Code" class="qr-image" width="30" height="30" style="vertical-align: middle; margin-left: 15px;">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Top-Up Service</h1>
+        <div class="overview">
+            <img src="TP.png" alt="Top-Up Image">
+            <div>
+                <h2>At a Glance</h2>
+                <p>
+                    Top-Up Anywhere, Anytime<br>
+                    Your currency, Your choice<br>
+                    Take control, Set your balance limit now<br>
+                    Trading fees as low as 0.05%
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h2>How it works</h2>
+        <ol>
+            <li>Select your desired currency tab (EUR, CNY, JPY, GBP, or INR).</li>
+            <li>Choose a predefined top-up amount by selecting a radio button or enter a custom amount in SGD.</li>
+            <li>Submit the top-up form by clicking on the topup button.</li>
+        </ol>          
+        <h3>Additional Feature</h3>
+        <ol>
+            <li>Enter a desired balance limit in SGD in the provided input field.</li>
+            <li>Click the "Set Limit" button to submit the entered balance limit.</li>
+            <li>If the current balance is below the limit, the balance display color changes to red; if the balance is above the limit, the color changes to black. This visual indicator helps you to track your spending and avoid overspending by signaling when the balance falls below the set limit.</li>
+        </ol>
+    </div>      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        .balance {
+            text-align: right;
+        }
+        .balance span {
+            font-weight: bold;
+            color: red;
+        }
+        .transaction-history {
+            margin: 2rem;
+        }
+        .transaction-history h2 {
+            margin-bottom: 1rem;
+        }
+        .transaction-history .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1rem;
+        }
+        .transaction-history .tabs .tab {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .transaction-history .tabs .tab.active {
+            background-color: #ccc;
+        }
+        .transaction-history .transaction {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #fff;
+        }
+        .transaction-history .transaction .date {
+            font-weight: bold;
+        }
+        .transaction-history .transaction .details {
+            display: flex;
+            justify-content: space-between;
+        }
+        .transaction-history .transaction .details .item {
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" alt="Logo" width="30" height="30">
+            </a>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="overview.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="CreateAcc.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <img src="PayQr.jpeg" alt="Qr Code" class="qr-image" width="30" height="30" style="vertical-align: middle; margin-left: 15px;">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+    <div class="balance">
+        <div class="container">
+            <span>Total Balance</span> SGD <span>3543.60</span>
+        </div>
+    </div>
+
+    <div class="container transaction-history">
+        <h2>Transaction History</h2>
+        <div class="tabs">
+            <div class="tab active">Jan</div>
+            <div class="tab">Feb</div>
+            <div class="tab">Mar</div>
+            <div class="tab">Apr</div>
+            <div class="tab">May</div>
+        </div>
+        <div class="transaction">
+            <div class="date">5/1/2024</div>
+            <div class="details">
+                <div class="item">
+                    <p>7 ELEVEN-Takashimaya</p>
+                    <p>1 Mega Lychee Slurpee<br>1 Ready-To-Eat Garlic Pepper Chicken Breast</p>
+                </div>
+                <div class="item text-right">
+                    <p>-7.40</p>
+                </div>
+            </div>
+        </div>
+        <div class="transaction">
+            <div class="date">5/1/2024</div>
+            <div class="details">
+                <div class="item">
+                    <p>Top-Up</p>
+                    <p>Top-up to my TransactX wallet</p>
+                </div>
+                <div class="item text-right">
+                    <p>+250.00</p>
+                </div>
+            </div>
+        </div>
+        <div class="transaction">
+            <div class="date">4/1/2024</div>
+            <div class="details">
+                <div class="item">
+                    <p>Harvey Norman-Bukit Panjang Plaza</p>
+                    <p>ASUS Zenbook 14 OLED (Core i7, 16GB/512GB, Windows 11) 14-inch Laptop - Ponder Blue (UX3402VA-KM115W)</p>
+                </div>
+                <div class="item text-right">
+                    <p>-1699.00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function updateBalance() {
+        const storedBalance = localStorage.getItem('accountBalance');
+        const balanceElement = document.querySelector('.balance span:last-child');
+        if (storedBalance) {
+            balanceElement.textContent = parseFloat(storedBalance).toFixed(2);
+        } else {
+            balanceElement.textContent = '0.00';
+        }
+
+        const balanceLimit = localStorage.getItem('balanceLimit');
+        if (balanceLimit) {
+            const currentBalance = parseFloat(storedBalance);
+            if (currentBalance < parseFloat(balanceLimit)) {
+                balanceElement.style.color = 'red';
+            } else {
+                balanceElement.style.color = 'black';
+            }
+        }
+    }
+
+    // Call updateBalance when the page loads
+    window.onload = updateBalance;
+
+    // You can add more JavaScript functionality for the transaction history page here
+    // For example, handling tab switching or dynamic transaction loading
+</script>
+    
+</body>
+</html>

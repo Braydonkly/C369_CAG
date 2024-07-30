@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    
+    .title {
+        font-size: 30px;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .custom-button {
+        background-color: black;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        font-size: 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .custom-button:hover {
+        text-decoration: none;
+        color: black;
+        background-color: white;
+        border: 2px solid black;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .col-form-label {
+        text-align: right;
+        padding-right: 15px;
+    }
+   
+    </style>
+    <script>
+        function validateAndStoreForm(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('emailAddress').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!fullName || !email || !password || !confirmPassword) {
+                alert("All fields are required!");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+    
+            localStorage.setItem('userFullName', fullName);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPassword', password);
+
+    
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" alt="Logo" width="30" height="30">
+            </a>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="overview.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="CreateAcc.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <img src="PayQr.jpeg" alt="Qr Code" class="qr-image" width="30" height="30" style="vertical-align: middle; margin-left: 15px;">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container form-container">
+        <h2 class="title">Create Account</h2>
+        <form onsubmit="validateAndStoreForm(event)">
+            <div class="form-group row">
+                <label for="fullName" class="col-sm-3 col-form-label">Full Name:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="fullName" placeholder="Enter full name" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="emailAddress" class="col-sm-3 col-form-label">Email Address:</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" id="emailAddress" placeholder="Enter email address" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="dob" class="col-sm-3 col-form-label">Date of Birth:</label>
+                <div class="col-sm-9">
+                    <input type="date" class="form-control" id="dob" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="phoneNo" class="col-sm-3 col-form-label">Phone No.:</label>
+                <div class="col-sm-9">
+                    <input type="tel" class="form-control" id="phoneNo" placeholder="Enter phone number" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="passportNo" class="col-sm-3 col-form-label">Passport No.:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="passportNo" placeholder="Enter passport number" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="nationality" class="col-sm-3 col-form-label">Nationality:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="nationality" placeholder="Enter nationality" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-sm-3 col-form-label">Password:</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password:</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="preferredLanguage" class="col-sm-3 col-form-label">Preferred Language:</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="preferredLanguage">
+                        <option>English</option>
+                        <option>Chinese</option>
+                        <option>Malay</option>
+                        <option>Tamil</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="custom-button">Create Account</button>
+                </div>
+            </div>
+        </form>
+        <p class="mt-3 text-center">Already have an account? <a href="login.html">Login</a></p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .qr-code {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+        .share-icons img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        .custom-button{
+            background-color: black;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            font-size: 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .custom-button:hover{
+            text-decoration: none;
+            color:black;
+            background-color: white;
+            border: 2px solid black;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="PayQr.jpeg" alt="QR Code" class="qr-code">
+        <h3>Share QR Code:</h3>
+        <div class="share-icons">
+            <a href="https://web.whatsapp.com/"><img src="whatsapp.png" alt="WhatsApp"></a>
+            <a href="https://www.instagram.com/accounts/login/?hl=en"><img src="insta.png" alt="Instagram"></a>
+            <a href="https://web.telegram.org/k/"><img src="Telegram.png" alt="Telegram"></a>
+            <img src="More.png" alt="More">
+        </div>
+        <a href="THistory.html" class="custom-button">Transaction History</a>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

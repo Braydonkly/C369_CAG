@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Bank Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            text-align: center;
+        }
+        .form-label {
+            float: left;
+            margin-top: 20px;
+        }
+        .custom-button {
+            background-color: black;
+            color: white;
+            padding: 5px 20px;
+            border: none;
+            font-size: 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .custom-button:hover{
+            text-decoration: none;
+            color:black;
+            background-color: white;
+            border: 2px solid black;
+        }
+    </style>
+    <script>
+        function validateAndLinkBank(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const storedEmail = localStorage.getItem('userEmail');
+            const storedPassword = localStorage.getItem('userPassword');
+
+            if (username === storedEmail && password === storedPassword) {
+                const bankName = document.getElementById('bankName').value;
+                const bankAccountNo = document.getElementById('bankAccountNo').value;
+                const country = document.getElementById('country').value;
+
+                if (!bankName || !bankAccountNo || !country) {
+                    alert("Please fill in all bank details.");
+                    return;
+                }
+
+                localStorage.setItem('linkedBankName', bankName);
+                localStorage.setItem('linkedBankAccountNo', bankAccountNo);
+                localStorage.setItem('linkedBankCountry', country);
+                
+                // Generate a random balance between 100 and 10000
+                const randomBalance = Math.floor(Math.random() * (10000 - 100 + 1)) + 100;
+                localStorage.setItem('accountBalance', randomBalance.toFixed(2));
+                
+                window.location.href = 'TpPage.html';
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" alt="Logo" width="30" height="30">
+            </a>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="overview.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="CreateAcc.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <img src="PayQr.jpeg" alt="Qr Code" class="qr-image" width="30" height="30" style="vertical-align: middle; margin-left: 15px;">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2 class="mb-4">Link Bank Account</h2>
+                <form onsubmit="validateAndLinkBank(event)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="bankName" class="form-label">Bank Name:</label>
+                                <input type="text" class="form-control" id="bankName" name="bankName" required/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bankAccountNo" class="form-label">Bank Account No:</label>
+                                <input type="text" class="form-control" id="bankAccountNo" name="bankAccountNo" required/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="country" class="form-label">Country:</label>
+                                <input type="text" class="form-control" id="country" name="country" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username:</label>
+                                <input type="text" class="form-control" id="username" name="username" required/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password:</label>
+                                <input type="password" class="form-control" id="password" name="password" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="custom-button">Link</button>
+                </form>
+                <p class="mt-3">Already linked? <a href="TpPage.html">Start Top Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
