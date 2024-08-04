@@ -7,7 +7,6 @@
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
         .balance {
             text-align: right;
         }
@@ -19,7 +18,7 @@
             margin: 2rem;
         }
         .transaction-history h2 {
-            margin-bottom: 1rem;
+            margin-bottom: 40px;
         }
         .transaction-history .tabs {
             display: flex;
@@ -50,6 +49,25 @@
         .transaction-history .transaction .details .item {
             width: 45%;
         }
+        .custom-button {
+            background-color: black;
+            color: white;
+            padding: 7px 15px;
+            border: none;
+            font-size: 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+
+        }
+        .custom-button:hover {
+            text-decoration: none;
+            color:black;
+            background-color: white;
+            border: 2px solid black;
+        }
+
     </style>
 </head>
 <body>
@@ -58,7 +76,7 @@
             <a class="navbar-brand" href="index.html">
                 <img src="logo.png" alt="Logo" width="30" height="30">
             </a>
-            <button class="navbar-toggler" type="button">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -79,7 +97,9 @@
                         <a class="nav-link" href="login.html">Login</a>
                     </li>
                     <li class="nav-item">
+                        <a href="QR.html">
                         <img src="PayQr.jpeg" alt="Qr Code" class="qr-image" width="30" height="30" style="vertical-align: middle; margin-left: 15px;">
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -88,64 +108,32 @@
    
     <div class="balance">
         <div class="container">
-            <span>Total Balance</span> SGD <span>3543.60</span>
+            <span>Total Balance</span> SGD <span id="balance-amount"></span>
         </div>
     </div>
 
     <div class="container transaction-history">
         <h2>Transaction History</h2>
+        <a href="TpPage.html" class="custom-button">Top-Up</a>
         <div class="tabs">
-            <div class="tab active">Jan</div>
-            <div class="tab">Feb</div>
-            <div class="tab">Mar</div>
-            <div class="tab">Apr</div>
-            <div class="tab">May</div>
+            <div class="tab" data-month="Apr">Apr</div>
+            <div class="tab" data-month="May">May</div>
+            <div class="tab" data-month="Jun">Jun</div>
+            <div class="tab" data-month="Jul">Jul</div>
+            <div class="tab active" data-month="Aug">Aug</div>
         </div>
-        <div class="transaction">
-            <div class="date">5/1/2024</div>
-            <div class="details">
-                <div class="item">
-                    <p>7 ELEVEN-Takashimaya</p>
-                    <p>1 Mega Lychee Slurpee<br>1 Ready-To-Eat Garlic Pepper Chicken Breast</p>
-                </div>
-                <div class="item text-right">
-                    <p>-7.40</p>
-                </div>
-            </div>
-        </div>
-        <div class="transaction">
-            <div class="date">5/1/2024</div>
-            <div class="details">
-                <div class="item">
-                    <p>Top-Up</p>
-                    <p>Top-up to my TransactX wallet</p>
-                </div>
-                <div class="item text-right">
-                    <p>+250.00</p>
-                </div>
-            </div>
-        </div>
-        <div class="transaction">
-            <div class="date">4/1/2024</div>
-            <div class="details">
-                <div class="item">
-                    <p>Harvey Norman-Bukit Panjang Plaza</p>
-                    <p>ASUS Zenbook 14 OLED (Core i7, 16GB/512GB, Windows 11) 14-inch Laptop - Ponder Blue (UX3402VA-KM115W)</p>
-                </div>
-                <div class="item text-right">
-                    <p>-1699.00</p>
-                </div>
-            </div>
-        </div>
+        <ul id="history-list">
+        </ul>
     </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
     function updateBalance() {
         const storedBalance = localStorage.getItem('accountBalance');
-        const balanceElement = document.querySelector('.balance span:last-child');
+        const balanceElement = document.getElementById('balance-amount');
         if (storedBalance) {
             balanceElement.textContent = parseFloat(storedBalance).toFixed(2);
         } else {
@@ -163,11 +151,109 @@
         }
     }
 
-    // Call updateBalance when the page loads
-    window.onload = updateBalance;
+    function displayTransactionHistory() {
+        const history = JSON.parse(localStorage.getItem('transactionHistory')) || [];
+        const historyList = document.getElementById('history-list');
 
-    // You can add more JavaScript functionality for the transaction history page here
-    // For example, handling tab switching or dynamic transaction loading
+
+        historyList.innerHTML = '';
+
+        const hardCodedTransactions = {
+            Apr: [
+                { date: '04/05/2024', type: '-', amount: '15.90', description: "Ah Gong's Traditional Clothes\nBatik Shirt" },
+                { date: '04/12/2024', type: '-', amount: '7.50', description: "Uncle Lim's Laksa Stall\nLaksa" },
+                { date: '04/20/2024', type: '-', amount: '12.00', description: "Madam Tan's Accessories\nJade Bracelet" },
+                { date: '04/28/2024', type: '+', amount: '100.00', description: 'Top-up to TransactX wallet' }
+            ],
+            May: [
+                { date: '03/05/2024', type: '-', amount: '6.80', description: "Auntie Zhang's Dim Sum\nSiu Mai and Har Gow" },
+                { date: '14/05/2024', type: '-', amount: '18.50', description: 'Old School Barber\nHaircut and Shave' },
+                { date: '22/05/2024', type: '-', amount: '9.90', description: 'Kampong Spice Shop\nAssorted Spices' },
+                { date: '30/05/2024', type: '+', amount: '150.00', description: 'Top-up to TransactX wallet' }
+            ],
+            Jun: [
+                { date: '07/06/2024', type: '-', amount: '5.50', description: "Grandma's Nonya Kueh\nAssorted Kueh" },
+                { date: '16/06/2024', type: '-', amount: '22.00', description: "Uncle Chong's Tailor\nPants Alteration" },
+                { date: '25/06/2024', type: '-', amount: '8.90', description: 'Hawker Center Fruit Stall\nDurian' },
+                { date: '30/06/2024', type: '+', amount: '200.00', description: 'Top-up to TransactX wallet' }
+            ],
+            Jul: [
+                { date: '02/07/2024', type: '-', amount: '4.50', description: 'Kopitiam Kaya Toast\nKaya Toast Set' },
+                { date: '11/07/2024', type: '-', amount: '16.80', description: 'Peranakan Beads Shop\nBeaded Slippers' },
+                { date: '19/07/2024', type: '-', amount: '7.20', description: "Ah Huat Fishball Noodles\nFishball Soup" },
+                { date: '28/07/2024', type: '+', amount: '120.00', description: 'Top-up to TransactX wallet' }
+            ],
+            Aug: [
+                { date: '01/08/2024', type: '-', amount: '6.50', description: "Madam Lee's Chicken Rice\nChicken Rice" },
+                { date: '01/08/2024', type: '-', amount: '14.90', description: 'Traditional Games Store\nChapteh and Five Stones' },
+                { date: '03/08/2024', type: '-', amount: '8.80', description: "Uncle Ben's Roti Prata\nRoti Prata Set" }
+            ]
+        };
+
+    
+        function renderTransactions(month) {
+            historyList.innerHTML = ''; 
+
+        
+            hardCodedTransactions[month].forEach(transaction => {
+                const listItem = document.createElement('li');
+                listItem.className = 'transaction';
+                listItem.innerHTML = `
+                    <div class="date">${transaction.date}</div>
+                    <div class="details">
+                        <div class="item">
+                            <p>${transaction.description}</p>
+                        </div>
+                        <div class="item text-right">
+                            <p>${transaction.type}${transaction.amount} SGD</p>
+                        </div>
+                    </div>
+                `;
+                if (transaction.type === '+') {
+                    listItem.style.color = 'green';
+                }
+                historyList.appendChild(listItem);
+            });
+
+        
+            if (month === 'Aug') {
+                history.forEach(transaction => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'transaction';
+                    listItem.innerHTML = `
+                        <div class="date">${transaction.date}</div>
+                        <div class="details">
+                            <div class="item">
+                                <p>Top-up to my TransactX wallet</p>
+                            </div>
+                            <div class="item text-right">
+                                <p>${transaction.type}${transaction.amount} SGD</p>
+                            </div>
+                        </div>
+                    `;
+                    listItem.style.color = 'green'; 
+                    historyList.appendChild(listItem);
+                });
+            }
+        }
+
+    
+        renderTransactions('Aug');
+
+    
+        document.querySelectorAll('.transaction-history .tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.transaction-history .tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderTransactions(tab.getAttribute('data-month'));
+            });
+        });
+    }
+
+    window.onload = function() {
+        updateBalance();
+        displayTransactionHistory();
+    };
 </script>
     
 </body>
